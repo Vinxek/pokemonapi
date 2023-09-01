@@ -1,10 +1,12 @@
+import { Link } from "react-router-dom";
+
 export default function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
-          Pokedex
-        </a>
+        <Link to={"/"}>
+          <a className="navbar-brand">Pokedex</a>
+        </Link>
         <div className="d-flex flex-row-reverse" id="navbarNav">
           <ul className="navbar-nav d-flex flex-row-reverse">
             <li className="nav-item">
@@ -13,9 +15,9 @@ export default function Navbar() {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
-                Register
-              </a>
+              <Link to={"/register"}>
+                <a className="nav-link">Register</a>
+              </Link>
             </li>
           </ul>
         </div>
