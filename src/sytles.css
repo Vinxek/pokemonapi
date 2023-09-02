@@ -1,0 +1,23 @@
+.custom-navbar {
+    background-color: #495057;
+  }
+
+  .container-for-cards {
+    padding-top: 30px; 
+  }
+
+  .link {
+    text-decoration: none; 
+    color: white;        
+    margin-right: 10px;     
+  }
+
+  .custom-navbar .navbar-brand {
+    color: white;     /* Set the text color to white */
+    font-weight: bold; /* Make the text bold */
+  }
+  
+  .custom-navbar .nav-link {
+    color: white;     /* Set the text color to white */
+    font-weight: bold; /* Make the text bold */
+  }

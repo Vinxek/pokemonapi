@@ -33,21 +33,23 @@ function PokemonCards() {
   }, []);
 
   return (
-    <div className="container">
-      <div className="row">
-        {allPokemon.map((pokemon, index) => (
-          <PokemonThumnails
-            id={pokemon.id}
-            name={pokemon.name}
-            image={
-              pokemon.sprites["other"]["official-artwork"]["front_default"]
-            }
-            type={pokemon.types[0].type.name}
-            weight={pokemon.weight / 10}
-            height={pokemon.height / 10}
-            key={index}
-          />
-        ))}
+    <div className="container-for-cards">
+      <div className="container">
+        <div className="row">
+          {allPokemon.map((pokemon, index) => (
+            <PokemonThumnails
+              id={pokemon.id}
+              name={pokemon.name}
+              image={
+                pokemon.sprites["other"]["official-artwork"]["front_default"]
+              }
+              type={pokemon.types[0].type.name}
+              weight={pokemon.weight / 10}
+              height={pokemon.height / 10}
+              key={index}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

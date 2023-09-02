@@ -1,14 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./toUpperCase";
+import toUpperCase from "./toUpperCase";
 
 const PokemonThumnails = ({ id, name, image, type, weight, height }) => {
   return (
-    <div className="col-4">
+    <div className="col-lg-4 mb-4 d-flex justify-content-center align-items-center">
       <div className="card border-dark mb-3" style={{ width: "18rem" }}>
-        <img src={image} className="card-img-top" alt={name} />
+        <img src={image} className="card-img-top" alt={toUpperCase(name)} />
         <div className="card-body">
           <h5 className="card-title">
-            {name} #{id.toString().padStart(4, "0")}
+            {toUpperCase(name)} #{id.toString().padStart(4, "0")}
           </h5>
           <p className="card-text">
             Weigh: {weight} kg &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

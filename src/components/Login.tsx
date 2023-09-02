@@ -2,55 +2,40 @@ import React, { useState } from "react";
 import { UserAuth } from "../config/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 
-const RegistrationPage = () => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const { signIn } = UserAuth();
   const navigate = useNavigate();
 
-  const { createUser } = UserAuth();
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    await createUser(email, password);
+    await signIn(email, password);
+    navigate("/");
 
     console.log("Email:", email);
     console.log("Password:", password);
-
-    navigate("/");
-
-    setEmail("");
-    setPassword("");
   };
 
   return (
     <div
       className="container d-flex justify-content-center align-items-center"
-      style={{ minHeight: "100vh" }}
+      style={{ minHeight: "80vh" }}
     >
       <div className="card col-md-5">
         <div className="card-body">
-          <h2 className="card-title text-center">Registration</h2>
-          <form onSubmit={handleSubmit}>
+          <h5 className="card-title">Login</h5>
+          <form onSubmit={handleLogin}>
             <div className="mb-3">
               <label htmlFor="email" className="form-label">
-                Email
+                Email address
               </label>
               <input
                 type="email"
                 className="form-control"
                 id="email"
-                placeholder="Enter your email"
                 value={email}
-                onChange={handleEmailChange}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
@@ -62,20 +47,19 @@ const RegistrationPage = () => {
                 type="password"
                 className="form-control"
                 id="password"
-                placeholder="Enter your password"
                 value={password}
-                onChange={handlePasswordChange}
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>
-            <button type="submit" className="btn btn-secondary btn-block">
-              Register
+            <button type="submit" className="btn btn-primary">
+              Login
             </button>
           </form>
           <div className="mt-3">
             <p>
-              Already have an account?{" "}
-              <Link to="/login">Click here to log in</Link>
+              Don't have an account?{" "}
+              <Link to="/register">Create an account</Link>
             </p>
           </div>
         </div>
@@ -84,4 +68,4 @@ const RegistrationPage = () => {
   );
 };
 
-export default RegistrationPage;
+export default Login;

@@ -7,6 +7,9 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "./config/firestore";
 import RegisterPage from "./components/RegisterPage";
 import { AuthContextProvider } from "./config/AuthContext";
+import Login from "./components/Login";
+import ProtectedRoute from "./config/ProtectedRoute";
+import TestComponent from "./components/TestComponent";
 
 function App() {
   const [allUsers, setAllUsers] = useState([]);
@@ -28,15 +31,25 @@ function App() {
   console.log(allUsers);
   return (
     <>
-      <div>
-        <Navbar />
-      </div>
-
       <AuthContextProvider>
+        <div>
+          <Navbar />
+        </div>
+
         <Routes>
           <Route path="/" element={<PokemonCards />} />
-          <Route path="/pokemon/:pokemonIndex" element={<Pokemon />} />
+
+          <Route
+            path="/pokemon/:pokemonIndex"
+            element={
+              <ProtectedRoute>
+                <Pokemon />
+              </ProtectedRoute>
+            }
+          />
+
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </AuthContextProvider>
     </>
