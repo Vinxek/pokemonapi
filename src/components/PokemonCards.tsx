@@ -5,27 +5,29 @@ import { useEffect, useState } from "react";
 function PokemonCards() {
   const [allPokemon, setAllPokemon] = useState([]);
   const [loadMore, setLoadMore] = useState(
-    "https://pokeapi.co/api/v2/pokemon?limit=20"
+    "https://pokeapi.co/api/v2/pokemon?limit=21"
   );
 
   const getAllPokemon = async () => {
     const res = await fetch(loadMore);
     const data = await res.json();
 
+    setLoadMore(data.next);
+
     function createPokemonObject(result) {
+      setAllPokemon([]);
       result.forEach(async (pokemon) => {
         const res = await fetch(
           `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`
         );
         const data = await res.json();
 
-        setAllPokemon((currentList) => [...currentList, data]);
-
-        console.log(allPokemon);
+        setAllPokemon((currentList) =>
+          [...currentList, data].sort((a, b) => a.id - b.id)
+        );
       });
     }
     createPokemonObject(data.results);
-    await console.log(allPokemon);
   };
 
   useEffect(() => {
@@ -49,6 +51,13 @@ function PokemonCards() {
               key={index}
             />
           ))}
+        </div>
+        <div className="container text-center">
+          <div className="mt-5">
+            <button className="btn btn-secondary mb-3" onClick={getAllPokemon}>
+              Next 20
+            </button>
+          </div>
         </div>
       </div>
     </div>

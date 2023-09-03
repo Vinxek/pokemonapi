@@ -10,6 +10,8 @@ import { AuthContextProvider } from "./config/AuthContext";
 import Login from "./components/Login";
 import ProtectedRoute from "./config/ProtectedRoute";
 import TestComponent from "./components/TestComponent";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [allUsers, setAllUsers] = useState([]);
@@ -37,10 +39,10 @@ function App() {
         </div>
 
         <Routes>
-          <Route path="/" element={<PokemonCards />} />
+          <Route path="/pokemonapi/" element={<PokemonCards />} />
 
           <Route
-            path="/pokemon/:pokemonIndex"
+            path="pokemonapi/pokemon/:pokemonIndex"
             element={
               <ProtectedRoute>
                 <Pokemon />
@@ -48,9 +50,10 @@ function App() {
             }
           />
 
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="pokemonapi/register" element={<RegisterPage />} />
+          <Route path="pokemonapi/login" element={<Login />} />
         </Routes>
+        <ToastContainer />
       </AuthContextProvider>
     </>
   );

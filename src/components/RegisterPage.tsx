@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { UserAuth } from "../config/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const RegistrationPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const { createUser } = UserAuth();
@@ -20,15 +22,42 @@ const RegistrationPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await createUser(email, password);
 
-    console.log("Email:", email);
-    console.log("Password:", password);
+    try {
+      await createUser(email, password);
 
-    navigate("/");
+      const notify = () =>
+        toast.info("Account Created!", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      notify();
 
-    setEmail("");
-    setPassword("");
+      navigate("/pokemonapi");
+
+      setEmail("");
+      setPassword("");
+    } catch (error: any) {
+      setError(error.message);
+      const notify = () =>
+        toast.error(error.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      notify();
+    }
   };
 
   return (
@@ -75,7 +104,7 @@ const RegistrationPage = () => {
           <div className="mt-3">
             <p>
               Already have an account?{" "}
-              <Link to="/login">Click here to log in</Link>
+              <Link to="/pokemonapi/login">Click here to log in</Link>
             </p>
           </div>
         </div>

@@ -1,20 +1,50 @@
 import React, { useState } from "react";
 import { UserAuth } from "../config/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const { signIn } = UserAuth();
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    await signIn(email, password);
-    navigate("/");
 
-    console.log("Email:", email);
-    console.log("Password:", password);
+    try {
+      await signIn(email, password);
+      navigate("/pokemonapi");
+
+      const notify = () =>
+        toast.success("Logged in", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      notify();
+    } catch (error: any) {
+      setError(error.message);
+      const notify = () =>
+        toast.error(error.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      notify();
+    }
   };
 
   return (
@@ -24,7 +54,7 @@ const Login = () => {
     >
       <div className="card col-md-5">
         <div className="card-body">
-          <h5 className="card-title">Login</h5>
+          <h2 className="card-title card-title text-center">Login</h2>
           <form onSubmit={handleLogin}>
             <div className="mb-3">
               <label htmlFor="email" className="form-label">
@@ -52,7 +82,7 @@ const Login = () => {
                 required
               />
             </div>
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-secondary">
               Login
             </button>
           </form>

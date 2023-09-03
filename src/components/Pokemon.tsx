@@ -8,10 +8,10 @@ const pokemon = () => {
     name: "",
     weight: 0,
     height: 0,
-    type: "",
   });
-  const [ability1, setAbility1] = useState();
-  const [ability2, setAbility2] = useState();
+  const [type, setType] = useState("");
+  const [ability1, setAbility1] = useState("");
+  const [ability2, setAbility2] = useState("");
   const [flavorText, setFlavorText] = useState();
   const [img, setImg] = useState();
   const params = useParams();
@@ -25,6 +25,7 @@ const pokemon = () => {
     console.log(data.type);
     setImg(data.sprites.other["official-artwork"]["front_default"]);
 
+    setType(data.types[0].type.name);
     setAbility1(data.abilities[0].ability.name);
     setAbility2(data.abilities[1].ability.name);
 
@@ -62,11 +63,11 @@ const pokemon = () => {
                 <p>
                   Weigh: {pokemon.weight / 10} kg
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Height:{" "}
-                  {pokemon.height / 10} m <br /> Type: {pokemon.type}
+                  {pokemon.height / 10} m <br /> Type: {toUpperCase(type)}
                 </p>
                 <h5>Abilities</h5>
-                <p className="card-text">{ability1}</p>
-                <p className="card-text">{ability2}</p>
+                <p className="card-text">{toUpperCase(ability1)}</p>
+                <p className="card-text">{toUpperCase(ability2)}</p>
               </div>
             </div>
           </div>

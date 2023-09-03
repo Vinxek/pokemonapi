@@ -13,11 +13,32 @@
   }
 
   .custom-navbar .navbar-brand {
-    color: white;     /* Set the text color to white */
-    font-weight: bold; /* Make the text bold */
+    color: white;    
+    font-weight: bold; 
   }
+
+  .custom-navbar .navbar-brand:hover {
+    color: white;
+    font-weight: bold;
+    animation: bounce 1.2s ease infinite;
+    -webkit-animation: bounce 1.2s ease infinite;
+}
   
   .custom-navbar .nav-link {
-    color: white;     /* Set the text color to white */
-    font-weight: bold; /* Make the text bold */
+    color: white;     
+    font-weight: bold; 
   }
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+  }
+
+
