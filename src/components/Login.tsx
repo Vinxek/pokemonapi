@@ -89,7 +89,7 @@ const Login = () => {
           <div className="mt-3">
             <p>
               Don't have an account?{" "}
-              <Link to="/register">Create an account</Link>
+              <Link to="/pokemonapi/register">Create an account</Link>
             </p>
           </div>
         </div>

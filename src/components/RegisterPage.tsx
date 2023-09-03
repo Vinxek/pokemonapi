@@ -63,7 +63,7 @@ const RegistrationPage = () => {
   return (
     <div
       className="container d-flex justify-content-center align-items-center"
-      style={{ minHeight: "100vh" }}
+      style={{ minHeight: "80vh" }}
     >
       <div className="card col-md-5">
         <div className="card-body">
